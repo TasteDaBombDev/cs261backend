@@ -2,9 +2,11 @@ package uk.co.group35.app.user.DBModels;
 
 import org.springframework.data.annotation.Id;
 
+@Entity
 public class User {
     @Id
     private Integer id;
+    
     private String username;
     private String password;
 

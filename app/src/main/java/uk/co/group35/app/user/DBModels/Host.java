@@ -1,4 +1,4 @@
-package uk.co.group35.app.user.DBModels;
+package uk.co.group35.app.user;
 
 public class Host extends User {
 
