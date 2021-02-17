@@ -15,12 +15,12 @@ public class UserController {
 
     @GetMapping("/all")
 	public ArrayList<User> getUsers() {
-		return repo.findall();
+		return this.repo.findall();
 	}  
 	
 	@PostMapping
 	public void addNewUser(@RequestBody User user) {
-		repo.save(user);
+		this.repo.save(user);
 	}
     
 }
