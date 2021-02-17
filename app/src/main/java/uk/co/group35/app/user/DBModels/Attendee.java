@@ -2,7 +2,7 @@ package uk.co.group35.app.user.DBModels;
 
 public class Attendee extends User {
 
-    public Attendee(Long id, String username, String password) {
+    public Attendee(Integer id, String username, String password) {
         super(id, username, password);
     }
 
