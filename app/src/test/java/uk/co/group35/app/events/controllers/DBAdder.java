@@ -14,8 +14,8 @@ public class DBAdder implements CommandLineRunner {
 //    private LiveEvents liveEvents;
     private DBDriver DBdriver;
 
-    public DBAdder(DBDriver dbDriver) {
-        this.DBdriver = dbDriver;
+    public DBAdder(DBDriver DBDriver) {
+        this.DBdriver = DBDriver;
     }
 
     @Override

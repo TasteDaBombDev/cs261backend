@@ -1,7 +1,10 @@
 package uk.co.group35.app.events.DBModels;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.IndexDirection;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import uk.co.group35.app.events.DBModels.UserFeedback;
 import uk.co.group35.app.events.enums.FormTemplates;
 
 import java.util.ArrayList;
@@ -12,6 +15,8 @@ public class LiveEvents {
 
     @Id
     private String rowID;
+
+    @Indexed(direction = IndexDirection.ASCENDING)
     private Integer EID;
     private ArrayList<UserFeedback> userFeedbacks;
     private ArrayList<FormTemplates> templates;

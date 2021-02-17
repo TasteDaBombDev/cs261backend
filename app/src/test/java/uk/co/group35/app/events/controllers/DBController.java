@@ -1,5 +1,6 @@
 package uk.co.group35.app.events.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,15 +12,16 @@ import java.util.List;
 @RequestMapping("/LiveEvents")
 public class DBController {
 
-    private DBDriver driver;
+    @Autowired
+    private DBDriver DBdriver;
 
     public DBController(DBDriver driver) {
-        this.driver = driver;
+        this.DBdriver = driver;
     }
 
     @GetMapping("/all")
     public List<LiveEvents> getAll(){
-        List<LiveEvents> events = this.driver.findAll();
+        List<LiveEvents> events = this.DBdriver.findAll();
         return events;
     }
 }
