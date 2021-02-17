@@ -1,4 +1,4 @@
-package uk.co.group35.app.events.DBModels;
+package uk.co.group35.app.DBModels;
 
 import java.util.ArrayList;
 

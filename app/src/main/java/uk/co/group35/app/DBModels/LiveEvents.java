@@ -1,10 +1,9 @@
-package uk.co.group35.app.events.DBModels;
+package uk.co.group35.app.DBModels;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.IndexDirection;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
-import uk.co.group35.app.events.enums.FormTemplates;
 
 import java.util.ArrayList;
 import java.util.Arrays;

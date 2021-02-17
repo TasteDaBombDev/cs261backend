@@ -1,4 +1,4 @@
-package uk.co.group35.app.user.DBModels;
+package uk.co.group35.app.DBModels;
 
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -17,6 +17,10 @@ public class User {
         this.id = id;
         this.username = username;
         this.password = password;
+    }
+
+    public User() {
+
     }
 
     public Integer getId() {

@@ -1,4 +1,4 @@
-package uk.co.group35.app.events.enums;
+package uk.co.group35.app.DBModels;
 
 // TO DO: Add a string for the question
 

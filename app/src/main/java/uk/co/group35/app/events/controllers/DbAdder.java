@@ -2,11 +2,8 @@ package uk.co.group35.app.events.controllers;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import uk.co.group35.app.events.enums.FormTemplates;
-import uk.co.group35.app.events.DBModels.LiveEvents;
-
-import java.util.Arrays;
-import java.util.List;
+import uk.co.group35.app.DBModels.FormTemplates;
+import uk.co.group35.app.DBModels.LiveEvents;
 
 /**
  * Class that adds to the database and handles the information addition

@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import uk.co.group35.app.events.DBModels.LiveEvents;
+import uk.co.group35.app.DBModels.LiveEvents;
 
 import java.util.List;
 

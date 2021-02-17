@@ -1,6 +1,6 @@
 package uk.co.group35.app.user;
 
-import uk.co.group35.app.user.DBModels.User;
+import uk.co.group35.app.DBModels.User;
 
 public class Host extends User {
 
