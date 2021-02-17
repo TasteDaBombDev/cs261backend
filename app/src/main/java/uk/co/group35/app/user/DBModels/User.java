@@ -1,9 +1,11 @@
 package uk.co.group35.app.user.DBModels;
 
-import org.springframework.data.annotation.Id;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.persistence.Entity;
 
 @Entity
+@Table(name = "Users")
 public class User {
     @Id
     private Integer id;
