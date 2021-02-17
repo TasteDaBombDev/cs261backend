@@ -4,7 +4,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.IndexDirection;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
-import uk.co.group35.app.events.DBModels.UserFeedback;
 import uk.co.group35.app.events.enums.FormTemplates;
 
 import java.util.ArrayList;
@@ -20,6 +19,12 @@ public class LiveEvents {
     private Integer EID;
     private ArrayList<UserFeedback> userFeedbacks;
     private ArrayList<FormTemplates> templates;
+
+    public LiveEvents(Integer EID){
+        this.EID = EID;
+        this.templates = new ArrayList<>();
+        this.userFeedbacks = new ArrayList<>();
+    }
 
     public LiveEvents(Integer EID, FormTemplates[] templates){
         this.EID = EID;

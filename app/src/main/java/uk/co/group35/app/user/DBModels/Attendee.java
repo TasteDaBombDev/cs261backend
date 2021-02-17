@@ -1,4 +1,4 @@
-package uk.co.group35.app.user;
+package uk.co.group35.app.user.DBModels;
 
 public class Attendee extends User {
 

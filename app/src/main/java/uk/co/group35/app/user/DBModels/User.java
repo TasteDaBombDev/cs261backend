@@ -1,4 +1,4 @@
-package uk.co.group35.app.user;
+package uk.co.group35.app.user.DBModels;
 
 import org.springframework.data.annotation.Id;
 

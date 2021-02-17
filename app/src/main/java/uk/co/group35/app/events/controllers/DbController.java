@@ -8,14 +8,18 @@ import uk.co.group35.app.events.DBModels.LiveEvents;
 
 import java.util.List;
 
+/**
+ * Class that creates the web paths and interacts with database.
+ * Base directory: api/LiveEvents
+ */
 @RestController
-@RequestMapping("/LiveEvents")
-public class DBController {
+@RequestMapping("api/LiveEvents")
+public class DbController {
 
     @Autowired
-    private DBDriver DBdriver;
+    private DbRepository DBdriver;
 
-    public DBController(DBDriver driver) {
+    public DbController(DbRepository driver) {
         this.DBdriver = driver;
     }
 
@@ -24,4 +28,5 @@ public class DBController {
         List<LiveEvents> events = this.DBdriver.findAll();
         return events;
     }
+
 }
