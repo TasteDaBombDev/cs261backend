@@ -1,5 +1,7 @@
 package uk.co.group35.app.user;
 
+import uk.co.group35.app.user.DBModels.User;
+
 public class Host extends User {
 
     public Host(Integer id, String username, String password) {

@@ -1,7 +1,7 @@
 package uk.co.group35.app.user.controllers;
 
 import java.util.List;
-
+import uk.co.group35.app.user.DBModels.User;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.*;
@@ -14,8 +14,8 @@ public class UserController {
 	private UserRepository repo;
 
     @GetMapping("/all")
-	public ArrayList<User> getUsers() {
-		return this.repo.findall();
+	public List<User> getUsers() {
+		return this.repo.findAll();
 	}  
 	
 	@PostMapping
