@@ -11,21 +11,21 @@ import java.util.ArrayList;
 
 public class FormTemplates {
 
-    private ArrayList<Pairs<FormTypes,String>> forms;
+    private Pairs<FormTypes,String> forms;
 
-    public FormTemplates(ArrayList<Pairs<FormTypes,String>> forms) {
+    public FormTemplates(Pairs<FormTypes,String> forms) {
         this.forms = forms;
     }
 
-    public Pairs<FormTypes,String> getForm(int pos) {
-        return forms.get(pos);
+    public Pairs<FormTypes,String> getForm() {
+        return forms;
     }
 
-    public FormTypes getFormType(int pos){
-        return forms.get(pos).getKey();
+    public FormTypes getFormType(){
+        return forms.getKey();
     }
 
-    public String getFormQuestion(int pos){
-        return forms.get(pos).getValue();
+    public String getFormQuestion(){
+        return forms.getValue();
     }
 }
