@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * Class that creates the web paths and interacts with database.
- * Base directory: api/LiveEvents
+ * Base directory: api/events/...
  */
 @RestController
 @RequestMapping("api/LiveEvents")
