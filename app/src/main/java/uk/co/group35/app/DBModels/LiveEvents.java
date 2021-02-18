@@ -4,11 +4,13 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.IndexDirection;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import uk.co.group35.app.DBModels.enums.FormTypes;
+import uk.co.group35.app.structures.Pairs;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-@Document(collation = "LiveEvents")
+@Document("LiveEvents")
 public class LiveEvents {
 
     @Id
@@ -18,18 +20,13 @@ public class LiveEvents {
     private Integer EID;
     private ArrayList<UserFeedback> userFeedbacks;
     private ArrayList<FormTemplates> templates;
+    private Integer moodScore;
 
-    public LiveEvents(Integer EID){
+    public LiveEvents(Integer EID, ArrayList<FormTemplates> templates){
         this.EID = EID;
-        this.templates = new ArrayList<>();
-        this.userFeedbacks = new ArrayList<>();
-    }
+        this.moodScore = 100;
 
-    public LiveEvents(Integer EID, FormTemplates[] templates){
-        this.EID = EID;
-
-        this.templates = new ArrayList<>();
-        this.templates.addAll(Arrays.asList(templates));
+        this.templates = templates;
 
         this.userFeedbacks = new ArrayList<>();
     }
@@ -42,8 +39,8 @@ public class LiveEvents {
         return this.userFeedbacks.get(pos);
     }
 
-    public FormTemplates getTemplate(int pos) {
-        return this.templates.get(pos);
+    public Pairs<FormTypes, String> getTemplate(int pos) {
+        return this.templates.get(pos).getForm();
     }
 
     public ArrayList<FormTemplates> getTemplates() {
@@ -52,5 +49,9 @@ public class LiveEvents {
 
     public Integer getEID() {
         return EID;
+    }
+
+    public Integer getMoodScore() {
+        return moodScore;
     }
 }

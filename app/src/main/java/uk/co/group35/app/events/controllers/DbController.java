@@ -1,19 +1,17 @@
 package uk.co.group35.app.events.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import uk.co.group35.app.DBModels.LiveEvents;
 
 import java.util.List;
 
 /**
  * Class that creates the web paths and interacts with database.
- * Base directory: api/LiveEvents
+ * Base directory: api/events/...
  */
 @RestController
-@RequestMapping("api/LiveEvents")
+@RequestMapping("api/event")
 public class DbController {
 
     @Autowired
@@ -29,4 +27,9 @@ public class DbController {
         return events;
     }
 
+    @GetMapping("/exit/{eventid}")
+    public String closeEvent(@PathVariable("eventid") Integer EID){
+//        this.DBdriver.find();
+        return String.valueOf(EID);
+    }
 }

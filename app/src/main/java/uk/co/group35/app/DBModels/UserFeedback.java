@@ -5,25 +5,25 @@ import java.util.ArrayList;
 public class UserFeedback {
 
     private Integer UID;
-    private Integer moodscore;
+    private Integer moodScore;
     private ArrayList<String> keywords;
 
-    public UserFeedback(Integer UID, Integer moodscore, ArrayList<String> keywords){
+    public UserFeedback(Integer UID, Integer moodScore, ArrayList<String> keywords){
         this.UID = UID;
-        this.moodscore = moodscore;
+        this.moodScore = moodScore;
         this.keywords = keywords;
     }
 
     public Integer getMoodscore() {
-        return moodscore;
+        return this.moodScore;
     }
 
     public Integer getUID() {
-        return UID;
+        return this.UID;
     }
 
     public void setMoodscore(Integer moodscore) {
-        this.moodscore = moodscore;
+        this.moodScore = moodscore;
     }
 
     public void setUID(Integer UID) {
@@ -31,6 +31,6 @@ public class UserFeedback {
     }
 
     public ArrayList<String> getKeywords() {
-        return keywords;
+        return this.keywords;
     }
 }
