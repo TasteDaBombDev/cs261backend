@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 
 @Entity
 @IdClass(EventAttendeeID.class)
-@Table(name = "Users")
+@Table(name = "Event_Attendees")
 public class EventAttendee {
 
     @Id
