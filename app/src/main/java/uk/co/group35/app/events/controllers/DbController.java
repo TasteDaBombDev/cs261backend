@@ -28,8 +28,8 @@ public class DbController {
     }
 
     @GetMapping("/exit/{eventid}")
-    public void closeEvent(@PathVariable("eventid") Integer EID){
+    public String closeEvent(@PathVariable("eventid") Integer EID){
 //        this.DBdriver.find();
+        return String.valueOf(EID);
     }
-
 }
