@@ -5,16 +5,18 @@ import java.util.ArrayList;
 public class UserFeedback {
 
     private Integer UID;
-    private Integer moodScore;
+    private Double moodScore;
     private ArrayList<String> keywords;
+    private Double moment;
 
-    public UserFeedback(Integer UID, Integer moodScore, ArrayList<String> keywords){
+    public UserFeedback(Integer UID, Double moodScore, ArrayList<String> keywords, Double moment){
         this.UID = UID;
         this.moodScore = moodScore;
         this.keywords = keywords;
+        this.moment = moment;
     }
 
-    public Integer getMoodscore() {
+    public Double getMoodscore() {
         return this.moodScore;
     }
 
@@ -22,7 +24,7 @@ public class UserFeedback {
         return this.UID;
     }
 
-    public void setMoodscore(Integer moodscore) {
+    public void setMoodscore(Double moodscore) {
         this.moodScore = moodscore;
     }
 
@@ -32,5 +34,9 @@ public class UserFeedback {
 
     public ArrayList<String> getKeywords() {
         return this.keywords;
+    }
+
+    public Double getMomentSent() {
+        return moment;
     }
 }

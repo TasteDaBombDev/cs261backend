@@ -8,33 +8,27 @@ import uk.co.group35.app.structures.Pairs;
 
 import java.util.ArrayList;
 
-@Document(collation = "FinishedEvents")
+@Document(collection = "finishedEvents")
 public class FinishedEvent {
 
     @Id
     private String rowID;
 
     @Indexed(direction = IndexDirection.ASCENDING)
+    private Integer EID;
     private Double overallMoodScore;
     private ArrayList<String> keywords;
     private ArrayList<Pairs<Double, Double>> times;
 
-    public FinishedEvent(Double overallMoodScore, ArrayList<String> keywords, ArrayList<Pairs<Double, Double>> times) {
+    public FinishedEvent(Integer EID, Double overallMoodScore, ArrayList<String> keywords, ArrayList<Pairs<Double, Double>> times) {
+        this.EID = EID;
         this.overallMoodScore = overallMoodScore;
         this.keywords = keywords;
         this.times = times;
     }
 
-    public FinishedEvent(Double overallMoodScore, ArrayList<Pairs<Double, Double>> times) {
-        this.overallMoodScore = overallMoodScore;
-        this.times = times;
-        this.keywords = new ArrayList<>();
-    }
-
-    public FinishedEvent() {
-        this.keywords = new ArrayList<>();
-        this.times = new ArrayList<>();
-        this.overallMoodScore = (double) 0;
+    public Integer getEID() {
+        return EID;
     }
 
     public ArrayList<String> getKeywords() {

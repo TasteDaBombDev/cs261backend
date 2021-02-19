@@ -10,7 +10,7 @@ import uk.co.group35.app.structures.Pairs;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-@Document("LiveEvents")
+@Document("liveEvents")
 public class LiveEvents {
 
     @Id
@@ -20,15 +20,15 @@ public class LiveEvents {
     private Integer EID;
     private ArrayList<UserFeedback> userFeedbacks;
     private ArrayList<FormTemplates> templates;
-    private Integer moodScore;
+    private Double moodScore;
 
-    public LiveEvents(Integer EID, ArrayList<FormTemplates> templates){
+    public LiveEvents(Integer EID, ArrayList<FormTemplates> templates, ArrayList<UserFeedback> userFeedbacks){
         this.EID = EID;
-        this.moodScore = 100;
+        this.moodScore = 100.0;
 
         this.templates = templates;
 
-        this.userFeedbacks = new ArrayList<>();
+        this.userFeedbacks = userFeedbacks;
     }
 
     public ArrayList<UserFeedback> getAllUserFeedbacks() {
@@ -51,7 +51,11 @@ public class LiveEvents {
         return EID;
     }
 
-    public Integer getMoodScore() {
+    public Double getMoodScore() {
         return moodScore;
+    }
+
+    public String getRowID() {
+        return rowID;
     }
 }
