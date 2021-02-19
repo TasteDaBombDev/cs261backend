@@ -11,7 +11,7 @@ import javax.persistence.Entity;
 public class EventAttendee {
 
     @Id
-    private Integer eventId;
+    private Integer eventID;
 
     @Id 
     private Integer attendeeID;
@@ -19,18 +19,18 @@ public class EventAttendee {
     private String status;
 
 
-    public EventAttendee(Integer eventId, Integer attendeeID, String status) {
-        this.eventId = eventId;
+    public EventAttendee(Integer eventID, Integer attendeeID, String status) {
+        this.eventID = eventID;
         this.attendeeID = attendeeID;
         this.status = status;
     }
 
-    public Integer getEventId() {
-        return this.eventId;
+    public Integer geteventID() {
+        return this.eventID;
     }
 
-    public void setEventId(Integer eventId) {
-        this.eventId = eventId;
+    public void seteventID(Integer eventID) {
+        this.eventID = eventID;
     }
 
     public Integer getAttendeeID() {
