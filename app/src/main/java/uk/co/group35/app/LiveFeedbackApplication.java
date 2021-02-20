@@ -16,8 +16,8 @@ public class LiveFeedbackApplication {
 }
 /*
 
-login /api/user/login - POSTGRESQL
-register /api/user/register - POSTGRESQL
+login /api/users/login - POSTGRESQL
+register /api/users/register - POSTGRESQL
 
 --USERPAGE--
 

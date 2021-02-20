@@ -19,6 +19,22 @@ public class UserService {
     public List<String> getAllUsers() {
         return Users_t.findAll().stream().map(User::getUsername).collect(Collectors.toList());
     }
+
+    /**
+     * Processes a login attempt
+     * @param user Login attempt
+     * @return -1 for failed request, 0 for successful login, 1 for unsuccessful login
+     */
+    public Integer checkLoginInformation(User user) {
+        String username = user.getUsername(), password = user.getPassword();
+        if (username == null || password == null) {
+            return -1;
+        } else if (Users_t.checkLoginInformation(username, password) != null) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
     
 
     
