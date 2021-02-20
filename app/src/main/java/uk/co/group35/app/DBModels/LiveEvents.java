@@ -39,6 +39,19 @@ public class LiveEvents {
         return this.userFeedbacks.get(pos);
     }
 
+    public void addFeedback(UserFeedback e){
+        userFeedbacks.add(e);
+
+        Double newMood = 0.0;
+
+        for (UserFeedback u : userFeedbacks){
+            if(u.getMoodscore() != -1.0)
+                newMood += u.getMoodscore();
+        }
+
+        this.moodScore = newMood/userFeedbacks.size();
+    }
+
     public Pairs<FormTypes, String> getTemplate(int pos) {
         return this.templates.get(pos).getForm();
     }

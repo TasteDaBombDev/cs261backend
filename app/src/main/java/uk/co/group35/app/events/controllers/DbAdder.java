@@ -26,19 +26,6 @@ public class DbAdder implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        ArrayList<String> k = new ArrayList<>();
-        k.add("Friend");
-        k.add("Nice");
-        k.add("Friendly");
-        k.add("Bad");
-        k.add("Pretty good");
-
-        UserFeedback f1 = new UserFeedback(1,80.0,k,1.0);
-        UserFeedback f2 = new UserFeedback(2,88.0,k,2.5);
-        ArrayList<UserFeedback> feedback = new ArrayList<>();
-        feedback.add(f1);
-        feedback.add(f2);
-
         FormTemplates t1 = new FormTemplates(new Pairs<>(FormTypes.SLIDER_FORM, "ce faci?"));
         FormTemplates t2 = new FormTemplates(new Pairs<>(FormTypes.STEPS_FORM, "iti place?"));
         ArrayList<FormTemplates> forms = new ArrayList<>();
@@ -47,10 +34,10 @@ public class DbAdder implements CommandLineRunner {
 
         List<LiveEvents> l = new ArrayList<>();
 
-        l.add(new LiveEvents(1,forms, feedback));
-        l.add(new LiveEvents(2,forms, feedback));
-        l.add(new LiveEvents(3,forms, feedback));
-        l.add(new LiveEvents(4,forms, feedback));
+        l.add(new LiveEvents(1,forms, new ArrayList<>()));
+        l.add(new LiveEvents(2,forms, new ArrayList<>()));
+        l.add(new LiveEvents(3,forms, new ArrayList<>()));
+        l.add(new LiveEvents(4,forms, new ArrayList<>()));
 
 
         this.DBdriver.deleteAll();

@@ -27,7 +27,7 @@ accept/deny the events (join event for public) /api/events/invites/{userid} - PO
 list all public events that they have not register (filters) /api/events/list - POSTGRESQL
 
 see previous events (host only) + analytics /api/events/display/{eventid} - MONGO
-joins events /api/event/join/{eventid},{userid} - POSTGRESQL (check if the user is attending to that particular event)
+joins events /api/event/join/{eventid},{userid} - POSTGRESQL (check if the user is attending to that particular event) MONGO
 exits events /api/events/exit/{eventid} - MONGO
 
 --EVENT_CREATION--

@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import uk.co.group35.app.DBModels.FinishedEvent;
 import uk.co.group35.app.DBModels.LiveEvents;
 import uk.co.group35.app.DBModels.UserFeedback;
+import uk.co.group35.app.events.ml.Analyzer;
 import uk.co.group35.app.structures.Pairs;
 
 import java.util.ArrayList;
@@ -52,5 +53,19 @@ public class DBService {
 
     public List<FinishedEvent> findFinishedEvent(Integer EID){
         return template.find(new Query().addCriteria(Criteria.where("EID").is(EID)), FinishedEvent.class);
+    }
+
+    public void submitFeedback(Integer eventID, Integer userID, Double formValue, String text, Double time) {
+        Analyzer analyzer = new Analyzer();
+        Pairs<Double, ArrayList<String>> result = analyzer.analyze(formValue, text);
+
+        UserFeedback userFeedback = new UserFeedback(userID, result.getKey(), result.getValue(), time);
+
+        List<LiveEvents> events = template.find(new Query().addCriteria(Criteria.where("EID").is(eventID)), LiveEvents.class);
+        LiveEvents e = events.get(0);
+        e.addFeedback(userFeedback);
+
+        template.remove(new Query().addCriteria(Criteria.where("EID").is(eventID)), LiveEvents.class);
+        template.save(e);
     }
 }
