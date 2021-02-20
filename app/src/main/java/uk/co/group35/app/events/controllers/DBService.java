@@ -55,9 +55,12 @@ public class DBService {
         return template.find(new Query().addCriteria(Criteria.where("EID").is(EID)), FinishedEvent.class);
     }
 
-    public void submitFeedback(Integer eventID, Integer userID, Double formValue, String text, Double time) {
+    public void submitFeedback(Integer eventID, Integer userID,
+                               Double[] moodScores, String[] texts, Integer[] radioScores,
+                               Double time) {
+
         Analyzer analyzer = new Analyzer();
-        Pairs<Double, ArrayList<String>> result = analyzer.analyze(formValue, text);
+        Pairs<Double, ArrayList<String>> result = analyzer.analyze(moodScores, texts, radioScores);
 
         UserFeedback userFeedback = new UserFeedback(userID, result.getKey(), result.getValue(), time);
 

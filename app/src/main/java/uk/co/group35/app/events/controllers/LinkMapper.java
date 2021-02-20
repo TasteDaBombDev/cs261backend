@@ -44,21 +44,23 @@ public class LinkMapper {
      * GENERALISATION: localhost:8080/api/event/submit/{eventID}/?formValue={value}&text={text}&moment={time}&userID={userID}
      * EXAMPLE: localhost:8080/api/event/submit/1/?formValue=-1.0&text=cool text&moment=17&userID=1
      *
-     * @param eid eventID
-     * @param uid userID
-     * @param formValue The value taken from the step or slider form. IF NONE SUBMITTED, THEN IS -1
-     * @param text The text taken from the feedback. IF NONE, EMPTY STRING
+     * @param eventID eventID
+     * @param userID userID
+     * @param moodScores the mood scores grouped as array
+     * @param texts the feedbacks grouped as array
+     * @param radioScores radio scores grouped as array
      * @param moment The exact time of the submitted feedback
      * @return A message if everything is good.
      */
     @GetMapping("/submit/{eventid}/")
-    public ResponseEntity<String> submitFeedback(@PathVariable("eventid") Integer eid,
-                                       @RequestParam("userID") Integer uid,
-                                       @RequestParam("formValue") Double formValue,
-                                       @RequestParam("text") String text,
+    public ResponseEntity<String> submitFeedback(@PathVariable("eventid") Integer eventID,
+                                       @RequestParam("userID") Integer userID,
+                                       @RequestParam("moodScore") Double[] moodScores,
+                                       @RequestParam("text") String[] texts,
+                                       @RequestParam("radioScore") Integer[] radioScores,
                                        @RequestParam("moment") Double moment){
 
-        service.submitFeedback(eid, uid, formValue, text, moment);
+        service.submitFeedback(eventID, userID, moodScores, texts, radioScores, moment);
 
         return new ResponseEntity<>("Feedback submitted with success!", HttpStatus.OK);
     }
