@@ -3,14 +3,19 @@ package uk.co.group35.app.DBModels;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Entity;
+import javax.persistence.Column;
 
 @Entity
 @Table(name = "Users")
 public class User {
     @Id
+    @Column(name = "userID")
     private Integer id;
     
+    @Column(name = "username")
     private String username;
+
+    @Column(name = "password")
     private String password;
 
     public User(Integer id, String username, String password) {

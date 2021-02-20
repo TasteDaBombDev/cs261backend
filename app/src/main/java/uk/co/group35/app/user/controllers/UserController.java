@@ -11,16 +11,13 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
 	@Autowired
-	private UserRepository repo;
+	private UserService service;
 
-    @GetMapping("/all")
-	public List<User> getUsers() {
-		return this.repo.findAll();
+	//private UserService service = new UserService(User_t);
+
+    @GetMapping("/list")
+	public List<String> getUsers() {
+		return service.getAllUsers();
 	}  
-	
-	@PostMapping
-	public void addNewUser(@RequestBody User user) {
-		this.repo.save(user);
-	}
     
 }

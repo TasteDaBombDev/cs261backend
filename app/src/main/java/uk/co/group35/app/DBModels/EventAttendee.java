@@ -25,11 +25,11 @@ public class EventAttendee {
         this.status = status;
     }
 
-    public Integer geteventID() {
+    public Integer getEventID() {
         return this.eventID;
     }
 
-    public void seteventID(Integer eventID) {
+    public void setEventID(Integer eventID) {
         this.eventID = eventID;
     }
 
