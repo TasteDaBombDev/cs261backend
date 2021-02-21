@@ -65,10 +65,9 @@ public class LinkMapper {
         return new ResponseEntity<>("Feedback submitted with success!", HttpStatus.OK);
     }
 
-    @GetMapping("/try")
-    public void sss(@RequestParam("string") String[] a){
-        for (String b : a) {
-            System.out.println(b);
-        }
+    @GetMapping("/chart/live/{eventID}")
+    public List<Pairs<Double,Double>> constructLiveChart(@PathVariable("eventid") Integer eventID){
+
+        return service.constructLiveChart(eventID);
     }
 }

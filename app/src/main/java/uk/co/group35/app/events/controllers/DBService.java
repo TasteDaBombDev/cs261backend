@@ -1,5 +1,6 @@
 package uk.co.group35.app.events.controllers;
 
+import javassist.compiler.ast.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -70,5 +71,13 @@ public class DBService {
 
         template.remove(new Query().addCriteria(Criteria.where("EID").is(eventID)), LiveEvents.class);
         template.save(e);
+    }
+
+    public List<Pairs<Double,Double>> constructLiveChart(Integer eventID){
+        List<Pairs<Double,Double>> chart = new ArrayList<>();
+
+        List<LiveEvents> events = template.find(new Query().addCriteria(Criteria.where("EID").is(eventID)), LiveEvents.class);
+
+        return chart;
     }
 }
