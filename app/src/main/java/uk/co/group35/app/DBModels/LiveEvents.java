@@ -9,6 +9,7 @@ import uk.co.group35.app.structures.Pairs;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 @Document("liveEvents")
 public class LiveEvents {
@@ -50,6 +51,16 @@ public class LiveEvents {
         }
 
         this.moodScore = newMood/userFeedbacks.size();
+    }
+
+    public List<Pairs<Double,Double>> generateChart(){
+        List<Pairs<Double,Double>> list = new ArrayList<>();
+
+        for( UserFeedback u : this.userFeedbacks){
+            list.add(new Pairs<>(u.getMoodscore(),u.getMomentSent()));
+        }
+
+        return list;
     }
 
     public Pairs<FormTypes, String> getTemplate(int pos) {

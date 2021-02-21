@@ -66,8 +66,17 @@ public class LinkMapper {
     }
 
     @GetMapping("/chart/live/{eventID}")
-    public List<Pairs<Double,Double>> constructLiveChart(@PathVariable("eventid") Integer eventID){
-
+    public List<Pairs<Double,Double>> constructLiveChart(@PathVariable("eventID") Integer eventID){
         return service.constructLiveChart(eventID);
+    }
+
+    @GetMapping("/chart/end/{eventID}")
+    public List<Pairs<Double,Double>> constructEndChart(@PathVariable("eventID") Integer eventID){
+        return service.constructEndChart(eventID);
+    }
+
+    @GetMapping("mood/{eventID}")
+    public Double fetchMoodScore(@PathVariable("eventID") Integer eventID){
+        return service.fetchMoodScore(eventID);
     }
 }

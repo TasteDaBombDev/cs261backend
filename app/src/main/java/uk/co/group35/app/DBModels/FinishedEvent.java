@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import uk.co.group35.app.structures.Pairs;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Document(collection = "finishedEvents")
 public class FinishedEvent {
@@ -39,7 +40,7 @@ public class FinishedEvent {
         return keywords.get(pos);
     }
 
-    public ArrayList<Pairs<Double, Double>> getTimes() {
+    public List<Pairs<Double, Double>> getTimes() {
         return times;
     }
 

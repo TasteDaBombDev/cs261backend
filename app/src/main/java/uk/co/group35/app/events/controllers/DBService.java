@@ -74,10 +74,14 @@ public class DBService {
     }
 
     public List<Pairs<Double,Double>> constructLiveChart(Integer eventID){
-        List<Pairs<Double,Double>> chart = new ArrayList<>();
+        return template.find(new Query().addCriteria(Criteria.where("EID").is(eventID)), LiveEvents.class).get(0).generateChart();
+    }
 
-        List<LiveEvents> events = template.find(new Query().addCriteria(Criteria.where("EID").is(eventID)), LiveEvents.class);
+    public List<Pairs<Double,Double>> constructEndChart(Integer eventID){
+        return template.find(new Query().addCriteria(Criteria.where("EID").is(eventID)), FinishedEvent.class).get(0).getTimes();
+    }
 
-        return chart;
+    public Double fetchMoodScore(Integer ID){
+        return template.find(new Query().addCriteria(Criteria.where("EID").is(ID)), LiveEvents.class).get(0).getMoodScore();
     }
 }
