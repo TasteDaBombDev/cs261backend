@@ -30,5 +30,21 @@ public class UserController {
 		}
 
 	}
+
+	@PostMapping("/register") 
+	public ResponseEntity<String> registerUser(@RequestBody User user) {
+			Integer response = service.registerUser(user);
+			// Required field(s) missing in POST request
+			if (response == -1) {
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+			} else if (response == 0) {
+				return ResponseEntity.status(HttpStatus.CONFLICT).body("User with username '" + user.getUsername() + "' already exists...");
+			} else {
+				return ResponseEntity.status(HttpStatus.CREATED).body(null);
+			}
+
+			
+			
+		}
     
 }
