@@ -20,5 +20,9 @@ public class EventService {
         return Events_t.findPastEvents(hostID);
     }
 
+    public List<String> getEventsAttending(Integer userID) {
+        return Events_t.findEventsAttending(userID);
+    }
+
 
 }

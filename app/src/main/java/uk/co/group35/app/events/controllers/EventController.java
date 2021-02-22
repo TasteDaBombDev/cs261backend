@@ -26,6 +26,11 @@ public class EventController {
     public List<String> getPastEvents(@PathVariable("hostID") Integer hostID) {
         return service.getPastEvents(hostID);
     }
+
+    @GetMapping("/attending/{userID}")
+    public List<String> getEventsAttending(@PathVariable("userID") Integer userID) {
+        return service.getEventsAttending(userID);
+    }
     
     
 }

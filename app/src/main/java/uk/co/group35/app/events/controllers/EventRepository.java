@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 
+@Repository
 public interface EventRepository extends JpaRepository<Event, Integer> {
 
     @Query(value = "SELECT event_name FROM Events e WHERE type LIKE 'public'",
@@ -17,5 +18,10 @@ public interface EventRepository extends JpaRepository<Event, Integer> {
         nativeQuery = true)
     List<String> findPastEvents(
         @Param("id") Integer hostID);
+
+    @Query(value = "SELECT event_name FROM Events e WHERE e.eventID IN (SELECT eventID FROM Event_Attendees ea WHERE ea.userID = :id AND ea.status = 'accepted')",
+        nativeQuery = true)
+    List<String> findEventsAttending(
+        @Param("id") Integer userID);
     
 }

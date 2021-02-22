@@ -16,7 +16,7 @@ public class EventAttendee {
     private Integer eventID;
 
     @Id 
-    @Column(name = "attendeeID")
+    @Column(name = "userID")
     private Integer attendeeID;
 
     @Column(name = "status")
