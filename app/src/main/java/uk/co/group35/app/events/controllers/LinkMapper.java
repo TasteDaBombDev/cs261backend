@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uk.co.group35.app.DBModels.FinishedEvent;
+import uk.co.group35.app.DBModels.FormTemplates;
 import uk.co.group35.app.DBModels.LiveEvents;
 import uk.co.group35.app.structures.Pairs;
 
@@ -28,12 +29,21 @@ public class LinkMapper {
         this.service = new DBService(template);
     }
 
-    @GetMapping("/exit/{eventid}")
+    /**
+     * Close an EVENT
+     * @param EID eventID
+     */
+    @GetMapping("/live/exit/{eventid}")
     public void closeEvent(@PathVariable("eventid") Integer EID){
         service.closeEvent(EID);
     }
 
-    @GetMapping("/display/{eventid}")
+    /**
+     * Displays an finished event
+     * @param EID eventID
+     * @return Details about the finished event
+     */
+    @GetMapping("/end/display/{eventid}")
     public List<FinishedEvent> getFinishedEvent(@PathVariable("eventid") Integer EID){
         return service.findFinishedEvent(EID);
     }
@@ -52,7 +62,7 @@ public class LinkMapper {
      * @param moment The exact time of the submitted feedback
      * @return A message if everything is good.
      */
-    @GetMapping("/submit/{eventid}/")
+    @GetMapping("/live/submit/{eventid}/")
     public ResponseEntity<String> submitFeedback(@PathVariable("eventid") Integer eventID,
                                        @RequestParam("userID") Integer userID,
                                        @RequestParam("moodScore") Double[] moodScores,
@@ -65,18 +75,28 @@ public class LinkMapper {
         return new ResponseEntity<>("Feedback submitted with success!", HttpStatus.OK);
     }
 
-    @GetMapping("/chart/live/{eventID}")
+    @GetMapping("/live/chart/{eventID}")
     public List<Pairs<Double,Double>> constructLiveChart(@PathVariable("eventID") Integer eventID){
         return service.constructLiveChart(eventID);
     }
 
-    @GetMapping("/chart/end/{eventID}")
+    @GetMapping("/end/chart/{eventID}")
     public List<Pairs<Double,Double>> constructEndChart(@PathVariable("eventID") Integer eventID){
         return service.constructEndChart(eventID);
     }
 
-    @GetMapping("mood/{eventID}")
+    @GetMapping("/live/mood/{eventID}")
     public Double fetchMoodScore(@PathVariable("eventID") Integer eventID){
         return service.fetchMoodScore(eventID);
+    }
+
+    @GetMapping("/live/keywords/{eventID}")
+    public List<String> fetchMoodLiveScore(@PathVariable("eventID") Integer eventID){
+        return service.fetchKeywords(eventID);
+    }
+
+    @GetMapping("/live/templates/{eventID}")
+    public List<FormTemplates> getTemplatesFromEvent(@PathVariable("eventID") Integer eventID){
+        return service.getTemplatesFromEvent(eventID);
     }
 }

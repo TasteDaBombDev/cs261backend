@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import uk.co.group35.app.DBModels.FinishedEvent;
+import uk.co.group35.app.DBModels.FormTemplates;
 import uk.co.group35.app.DBModels.LiveEvents;
 import uk.co.group35.app.DBModels.UserFeedback;
 import uk.co.group35.app.events.ml.Analyzer;
@@ -83,5 +84,13 @@ public class DBService {
 
     public Double fetchMoodScore(Integer ID){
         return template.find(new Query().addCriteria(Criteria.where("EID").is(ID)), LiveEvents.class).get(0).getMoodScore();
+    }
+
+    public List<FormTemplates> getTemplatesFromEvent(Integer eventID){
+        return template.find(new Query().addCriteria(Criteria.where("EID").is(eventID)), LiveEvents.class).get(0).getTemplates();
+    }
+
+    public List<String> fetchKeywords(Integer eventID){
+        return template.find(new Query().addCriteria(Criteria.where("EID").is(eventID)), LiveEvents.class).get(0).getKeywords();
     }
 }

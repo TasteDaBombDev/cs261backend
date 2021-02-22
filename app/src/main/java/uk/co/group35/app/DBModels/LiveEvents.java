@@ -10,6 +10,7 @@ import uk.co.group35.app.structures.Pairs;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Document("liveEvents")
 public class LiveEvents {
@@ -51,6 +52,17 @@ public class LiveEvents {
         }
 
         this.moodScore = newMood/userFeedbacks.size();
+    }
+
+    public List<String> getKeywords(){
+        List<String> k = new ArrayList<>();
+
+        for (UserFeedback u : userFeedbacks)
+            k.addAll(u.getKeywords());
+
+        k = (ArrayList<String>) k.stream().distinct().collect(Collectors.toList());
+
+        return k;
     }
 
     public List<Pairs<Double,Double>> generateChart(){
