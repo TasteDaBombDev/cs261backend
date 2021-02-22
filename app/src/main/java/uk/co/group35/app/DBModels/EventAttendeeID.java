@@ -5,6 +5,11 @@ import java.util.Objects;
 
 public class EventAttendeeID implements Serializable {
 
+    /**
+     * Default serial version ID
+     */
+    private static final long serialVersionUID = 1L;
+
     private Integer eventID;
     private Integer attendeeID;
 

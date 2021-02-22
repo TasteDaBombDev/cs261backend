@@ -4,7 +4,6 @@ import java.util.List;
 import uk.co.group35.app.DBModels.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.stream.Collectors;
 
 
 @Service
@@ -17,7 +16,9 @@ public class UserService {
      * Returns list of usernames of all users in the DB
      */
     public List<String> getAllUsers() {
-        return Users_t.findAll().stream().map(User::getUsername).collect(Collectors.toList());
+        return Users_t.findAllUsers();
+        
+        //return Users_t.findAll().stream().map(User::getUsername).collect(Collectors.toList());
     }
 
     /**
@@ -34,6 +35,28 @@ public class UserService {
         } else {
             return 1;
         }
+    }
+
+    /**
+     * Register a new user
+     * @param username username of new user
+     * @param password password of new user
+     * @return -1 for failed request, 0 if username already exists, 1 for successful registration
+     */
+    public Integer registerUser(User user) {
+        String username = user.getUsername(), password = user.getPassword();
+        if (username == null || password == null) {
+            return -1;
+        }
+        User newUser = new User(username, password);
+        try {
+            Users_t.saveAndFlush(newUser);
+        } catch (Exception e) {
+            System.out.println(e);
+            return 0;
+        }
+        return 1;
+
     }
     
 

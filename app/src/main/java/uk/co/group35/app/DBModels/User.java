@@ -4,11 +4,16 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Entity;
 import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.SequenceGenerator;
 
 @Entity
 @Table(name = "Users")
 public class User {
-    @Id
+    @Id 
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "userID_Sequence")
+    @SequenceGenerator(name = "userID_Sequence", allocationSize = 1)
     @Column(name = "userID")
     private Integer id;
     
@@ -18,14 +23,9 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    public User(Integer id, String username, String password) {
-        this.id = id;
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
-    }
-
-    public User() {
-
     }
 
     public Integer getId() {

@@ -3,6 +3,7 @@ package uk.co.group35.app.DBModels;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity
@@ -11,11 +12,14 @@ import javax.persistence.Entity;
 public class EventAttendee {
 
     @Id
+    @Column(name = "eventID")
     private Integer eventID;
 
     @Id 
+    @Column(name = "userID")
     private Integer attendeeID;
 
+    @Column(name = "status")
     private String status;
 
 

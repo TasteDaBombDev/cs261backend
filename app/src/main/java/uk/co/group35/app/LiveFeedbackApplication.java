@@ -16,15 +16,15 @@ public class LiveFeedbackApplication {
 }
 /*
 
-login /api/users/login - POSTGRESQL
-register /api/users/register - POSTGRESQL
+(done) login /api/users/login - POSTGRESQL
+(done) register /api/users/register - POSTGRESQL
 
 --USERPAGE--
 
-fetch past host events /api/events/past/{userid} - POSTGRESQL
+(done) fetch past host events /api/events/past/{userid} - POSTGRESQL
 list all events that the user will go /api/events/attending/{userid} - POSTGRESQL
 accept/deny the events (join event for public) /api/events/invites/{userid} - POSTGRESQL
-list all public events that they have not register (filters) /api/events/list - POSTGRESQL
+(done) list all public events that they have not register (filters) /api/events/list - POSTGRESQL
 
 see previous events (host only) + analytics /api/events/display/{eventid} - MONGO
 joins events /api/event/join/{eventid},{userid} - POSTGRESQL (check if the user is attending to that particular event) MONGO
@@ -33,7 +33,7 @@ exits events /api/events/exit/{eventid} - MONGO
 --EVENT_CREATION--
 
 create event /api/event/create/{userid,eventName,eventStartDate,eventStopDate,questions + template type} - POSTGRESQL,MONGO - Sync
-list all the users /api/users/list - POSTGRESQL
+(done) list all the users /api/users/list - POSTGRESQL
 
 --LIVE_Feedback_FORM-
 
