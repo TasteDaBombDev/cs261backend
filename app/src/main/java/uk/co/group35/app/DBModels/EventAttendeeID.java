@@ -10,6 +10,10 @@ public class EventAttendeeID implements Serializable {
      */
     private static final long serialVersionUID = 1L;
 
+
+    public EventAttendeeID() {}
+
+
     private Integer eventID;
     private Integer attendeeID;
 

@@ -22,8 +22,8 @@ public class LiveFeedbackApplication {
 --USERPAGE--
 
 (done) fetch past host events /api/events/past/{userid} - POSTGRESQL
-list all events that the user will go /api/events/attending/{userid} - POSTGRESQL
-accept/deny the events (join event for public) /api/events/invites/{userid} - POSTGRESQL
+(done) list all events that the user will go /api/events/attending/{userid} - POSTGRESQL
+(done) accept/deny the events (join event for public) /api/events/invites/{userid} - POSTGRESQL
 (done) list all public events that they have not register (filters) /api/events/list - POSTGRESQL
 
 see previous events (host only) + analytics /api/events/display/{eventid} - MONGO

@@ -1,7 +1,7 @@
-POST http://localhost:8080/api/users/register HTTP/1.1
+POST http://localhost:8080/api/events/invite/reply HTTP/1.1
 content-type: application/json
 
 { 
-    "username": "john", 
-    "password": "123"
+    "eventID": 15, 
+    "attendeeID": 10
 }

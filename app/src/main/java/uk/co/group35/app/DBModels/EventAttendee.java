@@ -29,6 +29,8 @@ public class EventAttendee {
         this.status = status;
     }
 
+    public EventAttendee() {}
+
     public Integer getEventID() {
         return this.eventID;
     }
