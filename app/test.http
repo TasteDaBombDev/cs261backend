@@ -1,7 +1,10 @@
-POST http://localhost:8080/api/events/invite/reply HTTP/1.1
+POST http://localhost:8080/api/event/create HTTP/1.1
 content-type: application/json
 
 { 
-    "eventID": 15, 
-    "attendeeID": 10
+        "hostID": 10,
+        "event_name": "My Event",
+        "start_date": "2021-03-31 9:30:20",
+        "end_date": "2021-03-31 10:30:20",
+        "type": "private"
 }

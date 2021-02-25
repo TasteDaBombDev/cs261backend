@@ -13,7 +13,7 @@ import javax.persistence.GenerationType;
 public class Event {
     @Id 
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "eventID_Sequence")
-    @SequenceGenerator(name = "eventID_Sequence", allocationSize = 1)
+    @SequenceGenerator(name="eventID_Sequence", sequenceName = "eventID_sequence", allocationSize = 1)
     @Column(name = "eventID")
     private Integer eventID;
     
@@ -39,6 +39,10 @@ public class Event {
         this.end_date = end_date;
         this.type = type;
     }
+
+
+    public Event() {}
+
 
     public Integer getEventID() {
         return this.eventID;

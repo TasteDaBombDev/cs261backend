@@ -7,10 +7,14 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import uk.co.group35.app.DBModels.Event;
 import uk.co.group35.app.DBModels.FinishedEvent;
 import uk.co.group35.app.DBModels.FormTemplates;
 import uk.co.group35.app.DBModels.LiveEvents;
+import uk.co.group35.app.structures.EventRequest;
 import uk.co.group35.app.structures.Pairs;
+import uk.co.group35.app.sync.Syncronizer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +28,9 @@ import java.util.List;
 public class LinkMapper {
 
     private DBService service;
+
+    @Autowired 
+    private Syncronizer syncService;
 
     public LinkMapper(MongoTemplate template) {
         this.service = new DBService(template);
@@ -98,5 +105,12 @@ public class LinkMapper {
     @GetMapping("/live/templates/{eventID}")
     public List<FormTemplates> getTemplatesFromEvent(@PathVariable("eventID") Integer eventID){
         return service.getTemplatesFromEvent(eventID);
+    }
+
+    @PostMapping("/create")
+    public ResponseEntity<String> createEvent(@RequestBody Event newEvent) {
+        Integer EID = syncService.createEvent(newEvent);
+        return new ResponseEntity<>(Integer.toString(EID), HttpStatus.OK);
+
     }
 }
