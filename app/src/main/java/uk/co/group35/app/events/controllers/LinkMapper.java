@@ -59,7 +59,7 @@ public class LinkMapper {
 
     /**
      * HOW TO CALL THIS FUNCTION:
-     * GENERALISATION: localhost:8080/api/event/submit/{eventID}/?formValue={value}&text={text}&moment={time}&userID={userID}
+     * GENERALISATION: localhost:8080/api/event/submit/{eventID}/?formValue={value1,value2,value3}&text={text1,text2,text3}&moment={time}&userID={userID}
      * EXAMPLE: localhost:8080/api/event/submit/1/?formValue=-1.0&text=cool text&moment=17&userID=1
      *
      * @param eventID eventID
@@ -90,7 +90,7 @@ public class LinkMapper {
 
     /**
      * REETURNS A LIST OF PAIRS THAT CONTAIN THE MOMENT AND THE VALUE OF THE MOOD
-     * @param eventID
+     * @param eventID the event ID
      * @return
      */
     @GetMapping("/end/chart/{eventID}")
