@@ -17,10 +17,6 @@ public class FormTemplates {
         this.forms = forms;
     }
 
-    public Pairs<FormTypes,String> getForm() {
-        return forms;
-    }
-
     public FormTypes getFormType(){
         return forms.getKey();
     }

@@ -8,8 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 
+import uk.co.group35.app.DBModels.FormTemplates;
+import uk.co.group35.app.DBModels.LiveEvents;
+import uk.co.group35.app.DBModels.enums.FormTypes;
 import uk.co.group35.app.structures.EventRequest;
 import uk.co.group35.app.DBModels.Event;
+import uk.co.group35.app.structures.Pairs;
+
+import java.util.ArrayList;
 
 @Service
 @Transactional
@@ -21,8 +27,41 @@ public class Syncronizer {
     @Autowired
     private MongoTemplate template;
 
-    public Integer createEvent(Event newEvent){
-        return saveNewEvent(newEvent);
+    /**
+     * CREATES AN EVENT BY SYNCRONISING THE PSQL WITH MONGO
+     * @param newEvent the event that have to be added to PSQL
+     * @param questions the questions array
+     * @param formsType the questions type array
+     */
+    public void createEvent(Event newEvent, String[] questions, Integer[] formsType){
+
+        Integer eventID = saveNewEvent(newEvent);
+        int i = 0;
+
+        ArrayList<FormTemplates> forms = new ArrayList<>();
+
+        for (Integer formType : formsType){
+            switch (formType){
+                case 0: { // MOOD SLIDER
+                    FormTemplates f = new FormTemplates(new Pairs<>(FormTypes.SLIDER_FORM, questions[i]));
+                    forms.add(f);
+                } break;
+
+                case 1: { // RADIO BUTTON
+                    FormTemplates f = new FormTemplates(new Pairs<>(FormTypes.STEPS_FORM, questions[i]));
+                    forms.add(f);
+                } break;
+
+                case 2: { // FEEDBACK FORM
+                    FormTemplates f = new FormTemplates(new Pairs<>(FormTypes.COMMENT_BLOCK_FORM, questions[i]));
+                    forms.add(f);
+                } break;
+            }
+            i++;
+        }
+
+        LiveEvents l = new LiveEvents(eventID,forms, new ArrayList<>());
+        template.save(l);
     }
 
     /**
@@ -40,4 +79,8 @@ public class Syncronizer {
         .setParameter("type", newEvent.getType())
         .getSingleResult();
     }
+
+
+
+
 }

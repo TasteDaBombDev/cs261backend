@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -87,30 +88,58 @@ public class LinkMapper {
         return service.constructLiveChart(eventID);
     }
 
+    /**
+     * REETURNS A LIST OF PAIRS THAT CONTAIN THE MOMENT AND THE VALUE OF THE MOOD
+     * @param eventID
+     * @return
+     */
     @GetMapping("/end/chart/{eventID}")
     public List<Pairs<Double,Double>> constructEndChart(@PathVariable("eventID") Integer eventID){
         return service.constructEndChart(eventID);
     }
 
+    /**
+     * REFRESHES THE MOOD VALUE FOR HOST
+     * @param eventID the event ID
+     * @return
+     */
     @GetMapping("/live/mood/{eventID}")
     public Double fetchMoodScore(@PathVariable("eventID") Integer eventID){
         return service.fetchMoodScore(eventID);
     }
 
+    /**
+     * REFRESHES THE KEYWORDS
+     * @param eventID the event ID
+     * @return
+     */
     @GetMapping("/live/keywords/{eventID}")
-    public List<String> fetchMoodLiveScore(@PathVariable("eventID") Integer eventID){
+    public List<String> fetchKeywordsLive(@PathVariable("eventID") Integer eventID){
         return service.fetchKeywords(eventID);
     }
 
-    @GetMapping("/live/templates/{eventID}")
-    public List<FormTemplates> getTemplatesFromEvent(@PathVariable("eventID") Integer eventID){
+    /**
+     * THE FUNCTION THAT SENDS THE USER THE FEEDBACK FORM AND QUESTIONS
+     * @param eventID the event ID
+     * @return a list of forms
+     */
+    @GetMapping("/live/user/join/{eventID}")
+    public List<FormTemplates> joinUserToEvent(@PathVariable("eventID") Integer eventID){
         return service.getTemplatesFromEvent(eventID);
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String> createEvent(@RequestBody Event newEvent) {
-        Integer EID = syncService.createEvent(newEvent);
-        return new ResponseEntity<>(Integer.toString(EID), HttpStatus.OK);
+    public ResponseEntity<String> createEvent(@RequestParam("hostID") Integer hostID,
+                                              @RequestParam("event_name") String eventName,
+                                              @RequestParam("start_date") String startDate,
+                                              @RequestParam("end_date") String endDate,
+                                              @RequestParam("type") String type,
+                                              @RequestParam("questions") String[] questions,
+                                              @RequestParam("formTypes") Integer[] formTypes) {
+
+        Event newEvent = new Event(hostID, eventName, startDate, endDate, type);
+        syncService.createEvent(newEvent, questions, formTypes);
+        return new ResponseEntity<>("Event succesfully created", HttpStatus.OK);
 
     }
 }

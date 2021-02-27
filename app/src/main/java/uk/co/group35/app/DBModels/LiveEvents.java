@@ -18,6 +18,8 @@ public class LiveEvents {
     @Id
     private String rowID;
 
+
+    //ADD RADIO SCORE SEPARATE VARIABLE
     @Indexed(direction = IndexDirection.ASCENDING)
     private Integer EID;
     private ArrayList<UserFeedback> userFeedbacks;
@@ -73,10 +75,6 @@ public class LiveEvents {
         }
 
         return list;
-    }
-
-    public Pairs<FormTypes, String> getTemplate(int pos) {
-        return this.templates.get(pos).getForm();
     }
 
     public ArrayList<FormTemplates> getTemplates() {
