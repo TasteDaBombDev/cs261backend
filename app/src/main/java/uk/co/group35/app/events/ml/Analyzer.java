@@ -8,8 +8,9 @@ import uk.co.group35.app.structures.Pairs;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import edu.stanford.nlp.pipeline.CoreDocument;
+import edu.stanford.nlp.pipeline.CoreSentence;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
-import edu.stanford.nlp.pipeline.*;
 
 
 public class Analyzer {
@@ -68,25 +69,19 @@ public class Analyzer {
 
         pipeline.annotate(document);
 
-        List<CoreMap> sentences = document.get(CoreAnnotations.SentencesAnnotation.class);
+        List<CoreSentence> sentences = coreDocument.sentences();
 
-        for (CoreMap sentence : sentences) {
-            // traversing the words in the current sentence
-            // a CoreLabel is a CoreMap with additional token-specific methods
-            for (CoreLabel token : sentence.get(CoreAnnotations.TokensAnnotation.class)) {
-                // this is the text of the token
-                String word = token.get(CoreAnnotations.TextAnnotation.class);
-                // this is the POS tag of the token
-                String pos = token.get(CoreAnnotations.PartOfSpeechAnnotation.class);
-                // this is the NER label of the token
-                String ne = token.get(CoreAnnotations.NamedEntityTagAnnotation.class);
+        for(CoreSentence sentence : sentences) {
 
-                System.out.println(String.format("Print: word: [%s] pos: [%s] ne: [%s]", word, pos, ne));
-            }
+            String sentiment = sentence.sentiment();
+
+            System.out.println(sentiment + "\t" + sentence);
+
         }
 
 
-        ArrayList<String> kw = new ArrayList<>();
+
+            ArrayList<String> kw = new ArrayList<>();
         kw.add("kw1");
         kw.add("kw2");
         kw.add("kw3");
