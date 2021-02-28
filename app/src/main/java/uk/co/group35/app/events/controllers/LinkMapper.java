@@ -86,7 +86,7 @@ public class LinkMapper {
         List<String> s = new ArrayList<>();
 
         Properties properties = new Properties();
-        properties.setProperty("annotators", "tokenize, ssplit, pos, lemma, ner");
+        properties.setProperty("annotators", "tokenize, ssplit, parse, sentiment");
         StanfordCoreNLP pipeline = new StanfordCoreNLP(properties);
 
         CoreDocument coreDocument = new CoreDocument(text);

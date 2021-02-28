@@ -1,10 +1,11 @@
 package uk.co.group35.app.events.ml;
 
+import edu.stanford.nlp.pipeline.CoreDocument;
+import edu.stanford.nlp.pipeline.CoreSentence;
+import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import uk.co.group35.app.structures.Pairs;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -56,22 +57,22 @@ public class Analyzer {
 
     private Pairs<Double, ArrayList<String>> textAnalysis(String text){
 
-//        Properties properties = new Properties();
-//        properties.setProperty("annotators", "tokenize, ssplit, pos, lemma, ner, parse, dcoref");
-//        StanfordCoreNLP pipeline = new StanfordCoreNLP(properties);
-//
-//        CoreDocument coreDocument = new CoreDocument(text);
-//        pipeline.annotate(coreDocument);
-//
-//        List<CoreSentence> sentences = coreDocument.sentences();
-//
-//        for(CoreSentence sentence : sentences) {
-//
-//            String sentiment = sentence.sentiment();
-//
-//            System.out.println(sentiment + "\t" + sentence);
-//
-//        }
+        Properties properties = new Properties();
+        properties.setProperty("annotators", "tokenize, ssplit, parse, sentiment");
+        StanfordCoreNLP pipeline = new StanfordCoreNLP(properties);
+
+        CoreDocument coreDocument = new CoreDocument(text);
+        pipeline.annotate(coreDocument);
+
+        List<CoreSentence> sentences = coreDocument.sentences();
+
+        for(CoreSentence sentence : sentences) {
+
+            String sentiment = sentence.sentiment();
+
+            System.out.println(sentiment + "\t" + sentence);
+
+        }
 
 
 
