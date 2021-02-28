@@ -1,24 +1,22 @@
 package uk.co.group35.app.events.controllers;
 
+import edu.stanford.nlp.pipeline.CoreDocument;
+import edu.stanford.nlp.pipeline.CoreSentence;
+import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import uk.co.group35.app.DBModels.Event;
 import uk.co.group35.app.DBModels.FinishedEvent;
 import uk.co.group35.app.DBModels.FormTemplates;
-import uk.co.group35.app.DBModels.LiveEvents;
-import uk.co.group35.app.structures.EventRequest;
 import uk.co.group35.app.structures.Pairs;
 import uk.co.group35.app.sync.Syncronizer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * Class that creates the web paths and interacts with database.
@@ -81,6 +79,31 @@ public class LinkMapper {
         service.submitFeedback(eventID, userID, moodScores, texts, radioScores, moment);
 
         return new ResponseEntity<>("Feedback submitted with success!", HttpStatus.OK);
+    }
+
+    @GetMapping("/send/data")
+    public List<String> listSentiment(@RequestParam("text") String text){
+        List<String> s = new ArrayList<>();
+
+        Properties properties = new Properties();
+        properties.setProperty("annotators", "tokenize, ssplit, pos, lemma, ner");
+        StanfordCoreNLP pipeline = new StanfordCoreNLP(properties);
+
+        CoreDocument coreDocument = new CoreDocument(text);
+        pipeline.annotate(coreDocument);
+
+        List<CoreSentence> sentences = coreDocument.sentences();
+
+        for(CoreSentence sentence : sentences) {
+
+            String sentiment = sentence.sentiment();
+
+            s.add(sentiment + " - " + sentence);
+        }
+
+        return s;
+
+
     }
 
     @GetMapping("/live/chart/{eventID}")
