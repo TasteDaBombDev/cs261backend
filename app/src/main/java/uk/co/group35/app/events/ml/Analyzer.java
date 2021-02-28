@@ -1,12 +1,16 @@
 package uk.co.group35.app.events.ml;
 
+import edu.stanford.nlp.ling.CoreAnnotations;
+import edu.stanford.nlp.ling.CoreLabel;
+import edu.stanford.nlp.util.CoreMap;
 import uk.co.group35.app.structures.Pairs;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.Collectors;
+
+import edu.stanford.nlp.pipeline.StanfordCoreNLP;
+import edu.stanford.nlp.pipeline.*;
+
 
 public class Analyzer {
 
@@ -44,7 +48,7 @@ public class Analyzer {
         Double averageText = 0.0;
         ArrayList<String> keywords = new ArrayList<>();
 
-        for (String text : texts){
+        for (String text : texts) {
              results = textAnalysis(text);
              averageText += results.getKey();
              keywords.addAll(results.getValue());
@@ -56,12 +60,39 @@ public class Analyzer {
 
     private Pairs<Double, ArrayList<String>> textAnalysis(String text){
 
+        Properties properties = new Properties();
+        properties.setProperty("annotators", "tokenize, ssplit, pos, lemma, ner, parse, dcoref");
+        StandfordCoreNLP pipeline = new StandfordCoreNLP(properties);
+
+        Annotation document = new Annotation(text);
+
+        pipeline.annotate(document);
+
+        List<CoreMap> sentences = document.get(CoreAnnotations.SentencesAnnotation.class);
+
+        for (CoreMap sentence : sentences) {
+            // traversing the words in the current sentence
+            // a CoreLabel is a CoreMap with additional token-specific methods
+            for (CoreLabel token : sentence.get(CoreAnnotations.TokensAnnotation.class)) {
+                // this is the text of the token
+                String word = token.get(CoreAnnotations.TextAnnotation.class);
+                // this is the POS tag of the token
+                String pos = token.get(CoreAnnotations.PartOfSpeechAnnotation.class);
+                // this is the NER label of the token
+                String ne = token.get(CoreAnnotations.NamedEntityTagAnnotation.class);
+
+                System.out.println(String.format("Print: word: [%s] pos: [%s] ne: [%s]", word, pos, ne));
+            }
+        }
+
+
         ArrayList<String> kw = new ArrayList<>();
         kw.add("kw1");
         kw.add("kw2");
         kw.add("kw3");
 
         Double value = (double) new Random().nextInt(100);
+
         return new Pairs<>(value,kw);
     }
 

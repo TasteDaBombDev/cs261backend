@@ -31,7 +31,4 @@ public interface EventRepository extends JpaRepository<Event, Integer> {
     List<String> findEventsPending(
         @Param("id") Integer userID);
 
-
-    
-    
 }
