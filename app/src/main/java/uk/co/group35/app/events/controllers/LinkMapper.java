@@ -49,7 +49,6 @@ public class LinkMapper {
         return service.findFinishedEvent(EID);
     }
 
-
     /**
      * HOW TO CALL THIS FUNCTION:
      * GENERALISATION: localhost:8080/api/event/submit/{eventID}/?formValue={value1,value2,value3}&text={text1,text2,text3}&moment={time}&userID={userID}

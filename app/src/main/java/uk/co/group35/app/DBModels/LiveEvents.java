@@ -4,11 +4,9 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.IndexDirection;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
-import uk.co.group35.app.DBModels.enums.FormTypes;
 import uk.co.group35.app.structures.Pairs;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,7 +26,7 @@ public class LiveEvents {
 
     public LiveEvents(Integer EID, ArrayList<FormTemplates> templates, ArrayList<UserFeedback> userFeedbacks){
         this.EID = EID;
-        this.moodScore = 100.0;
+        this.moodScore = -1.0;
 
         this.templates = templates;
 
@@ -53,7 +51,12 @@ public class LiveEvents {
                 newMood += u.getMoodscore();
         }
 
-        this.moodScore = newMood/userFeedbacks.size();
+        if(this.moodScore == -1)
+            this.moodScore = newMood/userFeedbacks.size();
+            else {
+                double kkk = newMood/userFeedbacks.size();
+                this.moodScore = (this.moodScore + kkk) / 2;
+        }
     }
 
     public List<String> getKeywords(){
@@ -71,7 +74,7 @@ public class LiveEvents {
         List<Pairs<Double,Double>> list = new ArrayList<>();
 
         for( UserFeedback u : this.userFeedbacks){
-            list.add(new Pairs<>(u.getMoodscore(),u.getMomentSent()));
+            list.add(new Pairs<>(u.getMomentSent(),u.getMoodscore()));
         }
 
         return list;

@@ -1,6 +1,5 @@
 package uk.co.group35.app.events.controllers;
 
-import javassist.compiler.ast.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -61,6 +60,8 @@ public class DBService {
                                Double[] moodScores, String[] texts, Integer[] radioScores,
                                Double time) {
 
+        //check the moodscroe value it starts with 0
+
         Analyzer analyzer = new Analyzer();
         Pairs<Double, ArrayList<String>> result = analyzer.analyze(moodScores, texts, radioScores);
 
@@ -69,6 +70,8 @@ public class DBService {
         List<LiveEvents> events = template.find(new Query().addCriteria(Criteria.where("EID").is(eventID)), LiveEvents.class);
         LiveEvents e = events.get(0);
         e.addFeedback(userFeedback);
+
+        System.out.println("============================================");
 
         template.remove(new Query().addCriteria(Criteria.where("EID").is(eventID)), LiveEvents.class);
         template.save(e);

@@ -25,23 +25,34 @@ public class Analyzer {
         Pairs<Double,ArrayList<String>> meaning = extractMeaning(texts);
 
         int n = 0;
-        Double s = 0.0;
+        double s = 0.0;
         if(averageMood >= 0){
             s += averageMood;
             n++;
         }
 
         if(averageRadio >= 0){
-            s =+ averageRadio;
+            s += averageRadio;
             n++;
         }
 
-        if(meaning.getKey() >= 0){
-            s += meaning.getKey();
-            n++;
+        double overallFeedbackScore = (double) Math.round((s / n) * 100) / 100;
+        if(overallFeedbackScore != 0) {
+            overallFeedbackScore = meaning.getKey() == 0.0 ? overallFeedbackScore : overallFeedbackScore + overallFeedbackScore * meaning.getKey();
+        } else {
+            if(meaning.getKey() == -0.2)
+                overallFeedbackScore = 20;
+            else if(meaning.getKey() == -0.1)
+                overallFeedbackScore = 40;
+            else if (meaning.getKey() == 0)
+                overallFeedbackScore = 60;
+            else if (meaning.getKey() == 0.1)
+                overallFeedbackScore = 80;
+            else if (meaning.getKey() == 0.2)
+                overallFeedbackScore = 100;
         }
-
-        return new Pairs<>((double) Math.round((s/n) * 100) / 100,meaning.getValue());
+        System.out.println("OVERALL: " + overallFeedbackScore);
+        return new Pairs<>(overallFeedbackScore,meaning.getValue());
     }
 
     private Pairs<Double, ArrayList<String>> extractMeaning(String[] texts){
@@ -65,7 +76,7 @@ public class Analyzer {
     private Pairs<Double, ArrayList<String>> textAnalysis(String text){
 
         ArrayList<String> keywords = new ArrayList<>();
-        double score = 0.0;
+        double factorisation = 0;
 
         CoreDocument coreDocument = new CoreDocument(text);
         pipeline.annotate(coreDocument);
@@ -76,25 +87,28 @@ public class Analyzer {
 
             String sentiment = sentence.sentiment();
 
-            switch (sentiment.toLowerCase()){
-                case "neutral":
+            System.out.println("SENTIMENT: " + sentiment);
 
+            switch (sentiment.toLowerCase()){
+
+                case "neutral":
+                    factorisation += 0.0;
                     break;
 
                 case "positive":
-                    score += 80;
+                    factorisation += 0.1;
                     break;
 
                 case "negative":
-                    score += 40;
+                    factorisation -= 0.1;
                     break;
 
                 case "very negative":
-                    score += 20;
+                    factorisation -= 0.2;
                     break;
 
                 case "very positive":
-                    score += 100;
+                    factorisation += 0.2;
                     break;
             }
 
@@ -104,7 +118,7 @@ public class Analyzer {
         keywords.add("kw2");
         keywords.add("kw3");
 
-        return new Pairs<>(score / sentences.size(),keywords);
+        return new Pairs<>(factorisation / sentences.size(),keywords);
     }
 
 }
