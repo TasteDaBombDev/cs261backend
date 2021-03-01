@@ -1,8 +1,5 @@
 package uk.co.group35.app.events.controllers;
 
-import edu.stanford.nlp.pipeline.CoreDocument;
-import edu.stanford.nlp.pipeline.CoreSentence;
-import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.http.HttpStatus;
@@ -14,9 +11,7 @@ import uk.co.group35.app.DBModels.FormTemplates;
 import uk.co.group35.app.structures.Pairs;
 import uk.co.group35.app.sync.Syncronizer;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 /**
  * Class that creates the web paths and interacts with database.
@@ -26,7 +21,7 @@ import java.util.Properties;
 @RequestMapping("api/event")
 public class LinkMapper {
 
-    private DBService service;
+    private final DBService service;
 
     @Autowired 
     private Syncronizer syncService;
@@ -79,31 +74,6 @@ public class LinkMapper {
         service.submitFeedback(eventID, userID, moodScores, texts, radioScores, moment);
 
         return new ResponseEntity<>("Feedback submitted with success!", HttpStatus.OK);
-    }
-
-    @GetMapping("/send/data")
-    public List<String> listSentiment(@RequestParam("text") String text){
-        List<String> s = new ArrayList<>();
-
-        Properties properties = new Properties();
-        properties.setProperty("annotators", "tokenize, ssplit, parse, sentiment");
-        StanfordCoreNLP pipeline = new StanfordCoreNLP(properties);
-
-        CoreDocument coreDocument = new CoreDocument(text);
-        pipeline.annotate(coreDocument);
-
-        List<CoreSentence> sentences = coreDocument.sentences();
-
-        for(CoreSentence sentence : sentences) {
-
-            String sentiment = sentence.sentiment();
-
-            s.add(sentiment + " - " + sentence);
-        }
-
-        return s;
-
-
     }
 
     @GetMapping("/live/chart/{eventID}")
@@ -162,7 +132,7 @@ public class LinkMapper {
 
         Event newEvent = new Event(hostID, eventName, startDate, endDate, type);
         syncService.createEvent(newEvent, questions, formTypes);
-        return new ResponseEntity<>("Event succesfully created", HttpStatus.OK);
+        return new ResponseEntity<>("Event successfully created", HttpStatus.OK);
 
     }
 }

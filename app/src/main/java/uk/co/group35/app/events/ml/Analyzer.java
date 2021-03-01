@@ -25,10 +25,12 @@ public class Analyzer {
             s += averageMood;
             n++;
         }
+
         if(averageRadio >= 0){
             s =+ averageRadio;
             n++;
         }
+
         if(meaning.getKey() >= 0){
             s += meaning.getKey();
             n++;
@@ -57,6 +59,8 @@ public class Analyzer {
 
     private Pairs<Double, ArrayList<String>> textAnalysis(String text){
 
+        double score = 0.0;
+
         Properties properties = new Properties();
         properties.setProperty("annotators", "tokenize, ssplit, parse, sentiment");
         StanfordCoreNLP pipeline = new StanfordCoreNLP(properties);
@@ -70,20 +74,36 @@ public class Analyzer {
 
             String sentiment = sentence.sentiment();
 
-            System.out.println(sentiment + "\t" + sentence);
+            switch (sentiment.toLowerCase()){
+                case "neutral":
+
+                    break;
+
+                case "positive":
+                    score += 80;
+                    break;
+
+                case "negative":
+                    score += 40;
+                    break;
+
+                case "very negative":
+                    score += 20;
+                    break;
+
+                case "very positive":
+                    score += 100;
+                    break;
+            }
 
         }
 
-
-
-            ArrayList<String> kw = new ArrayList<>();
+        ArrayList<String> kw = new ArrayList<>();
         kw.add("kw1");
         kw.add("kw2");
         kw.add("kw3");
 
-        Double value = (double) new Random().nextInt(100);
-
-        return new Pairs<>(value,kw);
+        return new Pairs<>(score / sentences.size(),kw);
     }
 
 }
