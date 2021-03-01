@@ -57,7 +57,7 @@ public class Analyzer {
 
     private Pairs<Double, ArrayList<String>> extractMeaning(String[] texts){
         if(texts.length == 0)
-            return new Pairs<>(-1.0,new ArrayList<>());
+            return new Pairs<>(0.0,new ArrayList<>());
 
         Pairs<Double,ArrayList<String>> results;
         Double averageText = 0.0;
