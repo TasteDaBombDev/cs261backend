@@ -11,7 +11,12 @@ import java.util.stream.Collectors;
 
 public class Analyzer {
 
+    private final StanfordCoreNLP pipeline;
+
     public Analyzer() {
+        Properties properties = new Properties();
+        properties.setProperty("annotators", "tokenize, ssplit, parse, sentiment");
+        pipeline = new StanfordCoreNLP(properties);
     }
 
     public Pairs<Double, ArrayList<String>> analyze(Double[] moodScores, String[] texts, Integer[] radioScores){
@@ -59,11 +64,8 @@ public class Analyzer {
 
     private Pairs<Double, ArrayList<String>> textAnalysis(String text){
 
+        ArrayList<String> keywords = new ArrayList<>();
         double score = 0.0;
-
-        Properties properties = new Properties();
-        properties.setProperty("annotators", "tokenize, ssplit, parse, sentiment");
-        StanfordCoreNLP pipeline = new StanfordCoreNLP(properties);
 
         CoreDocument coreDocument = new CoreDocument(text);
         pipeline.annotate(coreDocument);
@@ -98,12 +100,11 @@ public class Analyzer {
 
         }
 
-        ArrayList<String> kw = new ArrayList<>();
-        kw.add("kw1");
-        kw.add("kw2");
-        kw.add("kw3");
+        keywords.add("kw1");
+        keywords.add("kw2");
+        keywords.add("kw3");
 
-        return new Pairs<>(score / sentences.size(),kw);
+        return new Pairs<>(score / sentences.size(),keywords);
     }
 
 }
