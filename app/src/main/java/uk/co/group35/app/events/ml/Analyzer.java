@@ -15,7 +15,7 @@ public class Analyzer {
 
     public Analyzer() {
         Properties properties = new Properties();
-        properties.setProperty("annotators", "tokenize, ssplit, parse, sentiment");
+        properties.setProperty("annotators", "tokenize, ssplit, parse, sentiment, pos");
         pipeline = new StanfordCoreNLP(properties);
     }
 
@@ -55,7 +55,7 @@ public class Analyzer {
         return new Pairs<>(overallFeedbackScore,meaning.getValue());
     }
 
-    private Pairs<Double, ArrayList<String>> extractMeaning(String[] texts){
+    Pairs<Double, ArrayList<String>> extractMeaning(String[] texts){
         if(texts.length == 0)
             return new Pairs<>(0.0,new ArrayList<>());
 
@@ -85,6 +85,14 @@ public class Analyzer {
 
         for(CoreSentence sentence : sentences) {
 
+            for (int i = 0; i < sentence.tokens().size(); i++) {
+                // Condition: if the word is an adjective (posTag starts with "NN")
+                if (sentence.posTags() != null && sentence.posTags().get(i) != null && sentence.posTags().get(i).contains("JJ")) {
+                    // Put the word into the Set
+                    keywords.add(sentence.tokens().get(i).originalText());
+                }
+            }
+
             String sentiment = sentence.sentiment();
 
             System.out.println("SENTIMENT: " + sentiment);
@@ -111,13 +119,7 @@ public class Analyzer {
                     factorisation += 0.2;
                     break;
             }
-
         }
-
-        keywords.add("kw1");
-        keywords.add("kw2");
-        keywords.add("kw3");
-
         return new Pairs<>(factorisation / sentences.size(),keywords);
     }
 
