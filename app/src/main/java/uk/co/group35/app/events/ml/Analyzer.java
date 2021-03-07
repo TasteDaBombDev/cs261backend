@@ -40,15 +40,15 @@ public class Analyzer {
         if(overallFeedbackScore != 0) {
             overallFeedbackScore = meaning.getKey() == 0.0 ? overallFeedbackScore : overallFeedbackScore + overallFeedbackScore * meaning.getKey();
         } else {
-            if(meaning.getKey() == -0.2)
-                overallFeedbackScore = 20;
-            else if(meaning.getKey() == -0.1)
-                overallFeedbackScore = 40;
-            else if (meaning.getKey() == 0)
+            if(meaning.getKey() == -0.2) // VERY NEGATIVE
+                overallFeedbackScore = 30;
+            else if(meaning.getKey() == -0.1) // NEGATIVE
                 overallFeedbackScore = 60;
-            else if (meaning.getKey() == 0.1)
+            else if (meaning.getKey() == 0) // NEUTRAL
+                overallFeedbackScore = 70;
+            else if (meaning.getKey() == 0.1) // POSITIVE
                 overallFeedbackScore = 80;
-            else if (meaning.getKey() == 0.2)
+            else if (meaning.getKey() == 0.2) // VERY POSITIVE
                 overallFeedbackScore = 100;
         }
         System.out.println("OVERALL: " + overallFeedbackScore);

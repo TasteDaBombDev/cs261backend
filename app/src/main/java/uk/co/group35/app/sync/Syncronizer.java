@@ -1,20 +1,17 @@
 package uk.co.group35.app.sync;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
-
+import uk.co.group35.app.DBModels.Event;
 import uk.co.group35.app.DBModels.FormTemplates;
 import uk.co.group35.app.DBModels.LiveEvents;
 import uk.co.group35.app.DBModels.enums.FormTypes;
-import uk.co.group35.app.structures.EventRequest;
-import uk.co.group35.app.DBModels.Event;
 import uk.co.group35.app.structures.Pairs;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 
 @Service
@@ -22,7 +19,7 @@ import java.util.ArrayList;
 public class Syncronizer {
 
     @PersistenceContext
-    EntityManager em;
+    private EntityManager em;
 
     @Autowired
     private MongoTemplate template;

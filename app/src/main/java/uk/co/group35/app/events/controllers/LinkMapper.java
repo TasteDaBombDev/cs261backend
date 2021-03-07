@@ -127,7 +127,8 @@ public class LinkMapper {
                                               @RequestParam("end_date") String endDate,
                                               @RequestParam("type") String type,
                                               @RequestParam("questions") String[] questions,
-                                              @RequestParam("formTypes") Integer[] formTypes) {
+                                              @RequestParam("formTypes") Integer[] formTypes
+                                              /*user invitations?*/) {
 
         Event newEvent = new Event(hostID, eventName, startDate, endDate, type);
         syncService.createEvent(newEvent, questions, formTypes);
