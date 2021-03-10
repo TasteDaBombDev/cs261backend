@@ -1,10 +1,18 @@
-POST http://localhost:8080/api/event/create HTTP/1.1
-content-type: application/json
+//POST http://localhost:8080/api/event/create?hostID=10&event_name=Testing Event&start_date=2021-03-31 9:30:20&end_date=2021-03-31 10:30:20&type=private&questions=test1, test2&formTypes=0,2
 
-{ 
-        "hostID": 10,
-        "event_name": "My Event",
-        "start_date": "2021-03-31 9:30:20",
-        "end_date": "2021-03-31 10:30:20",
-        "type": "private"
-}
+GET http://localhost:8080/api/event/live/submit/8/?text=*$%^£@$?&moodScore=60&moment=19&userID=10
+
+
+//HTTP/1.1
+
+//content-type: application/json
+
+//{ 
+        //"hostID": 10,
+        //"event_name": "Testing Event",
+        //"start_date": "2021-03-31 9:30:20",
+        //"end_date": "2021-03-31 10:30:20",
+        //"type": "private",
+        //"questions": ["Are you enjoying this event", "Any other comments?"],
+        //"formTypes": [0, 2] 
+//}

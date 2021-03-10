@@ -43,13 +43,13 @@ public class Analyzer {
             if(meaning.getKey() == -0.2) // VERY NEGATIVE
                 overallFeedbackScore = 30;
             else if(meaning.getKey() == -0.1) // NEGATIVE
+                overallFeedbackScore = 50;
+            else if (meaning.getKey() == 0) // NEUTRAL 
                 overallFeedbackScore = 60;
-            else if (meaning.getKey() == 0) // NEUTRAL
-                overallFeedbackScore = 70;
             else if (meaning.getKey() == 0.1) // POSITIVE
-                overallFeedbackScore = 80;
+                overallFeedbackScore = 70;
             else if (meaning.getKey() == 0.2) // VERY POSITIVE
-                overallFeedbackScore = 100;
+                overallFeedbackScore = 90;
         }
         System.out.println("OVERALL: " + overallFeedbackScore);
         return new Pairs<>(overallFeedbackScore,meaning.getValue());
@@ -76,6 +76,7 @@ public class Analyzer {
     private Pairs<Double, ArrayList<String>> textAnalysis(String text){
 
         ArrayList<String> keywords = new ArrayList<>();
+        String current = "";
         double factorisation = 0;
 
         CoreDocument coreDocument = new CoreDocument(text);
@@ -86,10 +87,16 @@ public class Analyzer {
         for(CoreSentence sentence : sentences) {
 
             for (int i = 0; i < sentence.tokens().size(); i++) {
-                // Condition: if the word is an adjective (posTag starts with "NN")
+                // Condition: if the word is an adverb (posTag starts with "RB")
+                if (sentence.posTags() != null && sentence.posTags().get(i) != null && sentence.posTags().get(i).contains("RB")) {
+                    // Add the word to current
+                    current += sentence.tokens().get(i).originalText() + " ";
+                }
+                // Condition: if the word is an adjective (posTag starts with "JJ")
                 if (sentence.posTags() != null && sentence.posTags().get(i) != null && sentence.posTags().get(i).contains("JJ")) {
-                    // Put the word into the Set
-                    keywords.add(sentence.tokens().get(i).originalText());
+                    // Put the word into the keywords set and reset the current string 
+                    keywords.add(current + sentence.tokens().get(i).originalText());
+                    current = "";
                 }
             }
 

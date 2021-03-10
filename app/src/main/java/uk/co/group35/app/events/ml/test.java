@@ -10,7 +10,7 @@ public class test {
 
         Analyzer analyzer = new Analyzer();
 
-        String[] texts = {"I found this event to be very enjoyable, though I think it was a bit too quick"};
+        String[] texts = {"I can't hear you from the back of the room"};
         Pairs<Double,ArrayList<String>> meaning = analyzer.extractMeaning(texts);
         System.out.println("score:" + meaning.getKey());
         ArrayList<String> messages = meaning.getValue();

@@ -65,9 +65,9 @@ public class LinkMapper {
     @GetMapping("/live/submit/{eventid}/")
     public ResponseEntity<String> submitFeedback(@PathVariable("eventid") Integer eventID,
                                        @RequestParam("userID") Integer userID,
-                                       @RequestParam("moodScore") Double[] moodScores,
-                                       @RequestParam("text") String[] texts,
-                                       @RequestParam("radioScore") Integer[] radioScores,
+                                       @RequestParam(name = "moodScore") Double[] moodScores,
+                                       @RequestParam(name = "text") String[] texts,
+                                       @RequestParam(name = "radioScore") Integer[] radioScores,
                                        @RequestParam("moment") Double moment){
 
         service.submitFeedback(eventID, userID, moodScores, texts, radioScores, moment);
