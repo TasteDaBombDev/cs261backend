@@ -64,10 +64,12 @@ public class Analyzer {
         ArrayList<String> keywords = new ArrayList<>();
 
         for (String text : texts) {
-             results = textAnalysis(text);
-             averageText += results.getKey();
-             keywords.addAll(results.getValue());
-             keywords = (ArrayList<String>) keywords.stream().distinct().collect(Collectors.toList());
+            if(!text.equals("")) {
+                results = textAnalysis(text);
+                averageText += results.getKey();
+                keywords.addAll(results.getValue());
+                keywords = (ArrayList<String>) keywords.stream().distinct().collect(Collectors.toList());
+            }
         }
 
         return new Pairs<>(averageText/texts.length, keywords);
@@ -104,7 +106,7 @@ public class Analyzer {
 
             System.out.println("SENTIMENT: " + sentiment);
 
-            switch (sentiment.toLowerCase()){
+            switch (sentiment.toLowerCase()) {
 
                 case "neutral":
                     factorisation += 0.0;
