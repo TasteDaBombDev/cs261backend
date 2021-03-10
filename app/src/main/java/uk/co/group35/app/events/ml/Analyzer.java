@@ -39,6 +39,7 @@ public class Analyzer {
         double overallFeedbackScore = (double) Math.round((s / n) * 100) / 100;
         if(overallFeedbackScore != 0) {
             overallFeedbackScore = meaning.getKey() == 0.0 ? overallFeedbackScore : overallFeedbackScore + overallFeedbackScore * meaning.getKey();
+            overallFeedbackScore = overallFeedbackScore > 100 ? 100 : overallFeedbackScore;
         } else {
             if(meaning.getKey() == -0.2) // VERY NEGATIVE
                 overallFeedbackScore = 30;
