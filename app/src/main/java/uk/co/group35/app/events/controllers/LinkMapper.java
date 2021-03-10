@@ -70,7 +70,9 @@ public class LinkMapper {
                                        @RequestParam(name = "radioScore") Integer[] radioScores,
                                        @RequestParam("moment") Double moment){
 
-        service.submitFeedback(eventID, userID, moodScores, texts, radioScores, moment);
+        if(moodScores.length > 0 || texts.length > 0 || radioScores.length > 0){
+            service.submitFeedback(eventID, userID, moodScores, texts, radioScores, moment);
+        }
 
         return new ResponseEntity<>("Feedback submitted with success!", HttpStatus.OK);
     }
