@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 @SpringBootApplication
-@EnableMongoRepositories(basePackages = {"uk.co.group35.app.events.controllers"})
+@EnableMongoRepositories(basePackages = {"uk.co.group35.app.RESTcontrollers"})
 public class LiveFeedbackApplication {
 
     public static void main(String[] args) {

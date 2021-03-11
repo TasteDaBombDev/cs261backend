@@ -3,11 +3,11 @@ package uk.co.group35.app.sync;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
-import uk.co.group35.app.DBModels.Event;
-import uk.co.group35.app.DBModels.FormTemplates;
-import uk.co.group35.app.DBModels.LiveEvents;
+import uk.co.group35.app.DBModels.event.PSQLrelated.Event;
+import uk.co.group35.app.DBModels.event.MongoDBrelated.FormTemplates;
+import uk.co.group35.app.DBModels.event.MongoDBrelated.LiveEvents;
 import uk.co.group35.app.DBModels.enums.FormTypes;
-import uk.co.group35.app.structures.Pairs;
+import uk.co.group35.app.utils.general.Pairs;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

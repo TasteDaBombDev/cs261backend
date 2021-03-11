@@ -1,6 +1,6 @@
 <persistence-unit name="uk.co.group35.app.DBModels.event_manager">
     <description>Event EntityManager</description>
-    <class>uk.co.group35.app.DBModels.Event</class> 
+    <class>uk.co.group35.app.DBModels.event.PSQLrelated.Event</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
         <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/storage "/>
