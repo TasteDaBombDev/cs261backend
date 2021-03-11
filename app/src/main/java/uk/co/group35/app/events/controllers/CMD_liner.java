@@ -7,11 +7,11 @@ import org.springframework.stereotype.Component;
  * Class that adds to the database
  */
 @Component
-public class DbAdder implements CommandLineRunner {
+public class CMD_liner implements CommandLineRunner {
 
     private DbDriver DBdriver;
 
-    public DbAdder(DbDriver DBDriver) {
+    public CMD_liner(DbDriver DBDriver) {
         this.DBdriver = DBDriver;
     }
 
