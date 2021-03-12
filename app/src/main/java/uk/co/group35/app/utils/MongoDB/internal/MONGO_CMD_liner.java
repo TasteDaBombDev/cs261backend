@@ -14,8 +14,6 @@ public class MONGO_CMD_liner implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-
-
     }
 
 }
