@@ -25,21 +25,21 @@ public class LiveFeedbackApplication {
 (done) accept/deny the events (join event for public) /api/events/invites/{userid} - POSTGRESQL
 (done) list all public events that they have not register (filters) /api/events/list - POSTGRESQL
 
-see previous events (host only) + analytics /api/events/display/{eventid} - MONGO
-joins events /api/event/join/{eventid},{userid} - POSTGRESQL (check if the user is attending to that particular event) MONGO
-exits events /api/events/exit/{eventid} - MONGO
+(done) see previous events (host only) + analytics /api/events/display/{eventid} - MONGO
+(done) joins events /api/event/join/{eventid},{userid} - POSTGRESQL (check if the user is attending to that particular event) MONGO
+(done) exits events /api/events/exit/{eventid} - MONGO
 
 --EVENT_CREATION--
 
-create event /api/event/create/{userid,eventName,eventStartDate,eventStopDate,questions + template type} - POSTGRESQL,MONGO - Sync
+(done) create event /api/event/create/{userid,eventName,eventStartDate,eventStopDate,questions + template type} - POSTGRESQL,MONGO - Sync
 (done) list all the users /api/users/list - POSTGRESQL
 
 --LIVE_Feedback_FORM-
 
-submit a feedback /api/submit/{userid},{eventid} - MONGO
+(done) submit a feedback /api/submit/{userid},{eventid} - MONGO
 
 --LIVE_EVENT_PAGE-
-fetch_data for the event /api/events/data/{eventid} - MONGO
+(done) fetch_data for the event /api/events/data/{eventid} - MONGO
 
 
 */

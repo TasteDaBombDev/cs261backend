@@ -11,10 +11,6 @@ public class MONGO_CMD_liner implements CommandLineRunner {
 
     private MongoDB_Driver DBdriver;
 
-    public MONGO_CMD_liner(MongoDB_Driver MongoDBDriver) {
-        this.DBdriver = MongoDBDriver;
-    }
-
     @Override
     public void run(String... args) throws Exception {
 
